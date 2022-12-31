@@ -4,7 +4,7 @@
 <?php loginck(); ?>
 
 
-<!-- put data to database -->
+<!-- add new post to database -->
 <?php 
 	if(isset($_POST['add-post'])){
 		$title = $_POST['title'];
@@ -16,6 +16,8 @@
 
 		$Image = $_FILES['image']['name'];
 		$Target = "Upload/".basename($_FILES['image']['name']);
+
+		// insert post query
 
 		$query = "insert into posts(datetime,title,category,author,image,post) Values('$DateTime','$title','$catname','$Admin','$Image','$post_des')";
 
