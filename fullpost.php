@@ -93,6 +93,26 @@
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search-topic">
             <button class="btn btn-outline-success" type="submit" name="search-btn">Search</button>
           </form>
+          <?php 
+        if(isset($_SESSION['visitor_id']))
+        { ?>
+
+
+
+
+          <a href="" class="ms-3 p-2"><?php echo $_SESSION['visitor_name']; ?></a> |
+
+          <a href="userpasschange.php" class=" p-2">Change password</a>|
+          <a href="userlogout.php" class=" p-2">Logout</a>
+
+          <?php
+        }else{
+
+         ?>
+            <a href="userlogin.php" class="ms-3 p-2">Enter</a> |
+            <a href="userregistration.php" class=" p-2">Register</a>
+
+        <?php } ?>
         </div>
       </div>
     </nav>
