@@ -7,46 +7,6 @@
 <!-- put data to database -->
 	<?php 
 
-	// 	$editid = $_GET['editid'];
-	// if(isset($_POST['update-post'])){
-	// 	$title = $_POST['title'];
-	// 	include 'datetime.php';
-	// 	$DateTime = $DateTime;
-	// 	$catname = $_POST['category'];
-	// 	$post_des = $_POST['post'];
-	// 	$Admin =  "Tanha";
-
-	// 	$Image = $_FILES['image']['name'];
-	// 	$Target = "Upload/".basename($_FILES['image']['name']);
-
-	// 	$query = "UPDATE `posts` SET `title` = '$title', `category` = '$catname', `post` = '$post_des' WHERE `posts`.`id` = $editid";
-
-    	
-
-  //   	if(empty($title)){
-  //   		$_SESSION['Errormessage'] = "please fill all the fields";
-  //   		Redirect_to("dashboard.php");
-  //   	}elseif(strlen($title)<2){
-  //   		$_SESSION['Errormessage'] = "title should be at least 2 Character";
-  //   		Redirect_to("dashboard.php");
-  //   	}else{
-
-  //   		$add_query = mysqli_query($db , $query);
-  //   		move_uploaded_file($_FILES['image']['tmp_name'],$Target);
-
-  //   		if($add_query){
-	// 			$_SESSION['Successmessage'] = "post added successfully";
-	// 			Redirect_to("dashboard.php");
-  //   		}else{
-	//     		$_SESSION['Errormessage'] = "post can't add";
-	//     		Redirect_to("dashboard.php");
-  //   	}
-    	
-  //   	}
-	// }
-
-
-
 	$editid = $_GET['editid'];
 	if(isset($_POST['update-post'])){
 		$title = $_POST['title'];
@@ -177,6 +137,17 @@
 					  </li>
 					  <li class="">
 					    <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i> Comments</a>
+					    <?php 
+
+					    	$count_disapp_query="SELECT COUNT(*) FROM comments WHERE status = 'OFF'";
+
+								 $query = mysqli_query($db,$count_disapp_query);
+								 $result_disapp = mysqli_fetch_array($query);
+								 $total_disapp = array_shift($result_disapp);
+								 if($total_disapp>0){
+					    	 ?>
+					    	 <span class="badge badge-pill bg-danger"><?php echo $total_disapp ?></span>
+					    	<?php } ?>
 					  </li>
 					  <li class="">
 					    <a class="nav-link" href="blog.php"><i class="fa-solid fa-blog"></i> live Blog</a>
@@ -201,18 +172,7 @@
 
 				<?php 
 
-				// $editid = $_GET['editid'];
-				// $read_query = "select * from posts order by datetime desc";
-        // $result = mysqli_query($db,$read_query);
-        // while($row = mysqli_fetch_assoc($result)){
-        //   $post_id = $row['id'];
-        //   $post_date = $row['datetime'];
-        //   $post_title = $row['title'];
-        //   $post_cat = $row['category'];
-        //   $author = $row['author'];
-        //   $post_image = $row['image'];
-        //   $post_des = $row['post'];
-        // }
+
 
 				$editid= $_GET['editid'];
 				$read_query="select * from posts where id=$editid";

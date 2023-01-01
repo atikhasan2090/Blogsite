@@ -142,8 +142,10 @@ if (isset($_GET['del_commentid'])){
 								 $query = mysqli_query($db,$count_disapp_query);
 								 $result_disapp = mysqli_fetch_array($query);
 								 $total_disapp = array_shift($result_disapp);
+								 if($total_disapp>0){
 					    	 ?>
-					    	 <span class="label label-danger" style="color:white;background-color: red;border-radius: 5px;font-size: 12px;padding-top: 3px;padding-bottom: 3px;padding-left: 5px;padding-right: 5px"><?php echo $total_disapp ?></span>
+					    	 <span class="badge badge-pill bg-danger"><?php echo $total_disapp ?></span>
+					    	<?php } ?>
 
 
 					    </a>
