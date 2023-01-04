@@ -15,6 +15,19 @@
 
 
 
+<?php 
+if(isset($_POST['putotp'])){
+	$otp = $_POST['otp'];
+	
+	if($otp == $_SESSION['otp']){
+		Redirect_to("setnewpass.php");
+	}else{
+		$_SESSION['Errormessage'] = "The otp is incorrect";
+		Redirect_to("putotp.php");
+	}
+	
+
+}
 
 
 
@@ -101,25 +114,25 @@
 
 			<div class="col-sm-4 offset-4">
 				<br><br><br><br><br>
-				<h2 class="text-center mb-4">Password vulli kemne?</h2>
+				<h2 class="text-center mb-4">An otp is sent to <?php echo $_SESSION['fmail'] ?>. Put the otp here :</h2>
 
 				<div><?php 
 				echo message(); 
 				echo Successmessage(); 
 				?></div>
 				
-				<form action="mail.php" method="POST" enctype="multipart/form-data">
+				<form action="putotp.php" method="POST" enctype="multipart/form-data">
 
 	                <div class="mb-3">
-	                  <label for="email" class="form-label"><span class="FieldInfo">Your email :</span></label>
+	                  <label for="otp" class="form-label"><span class="FieldInfo">OTP :</span></label>
 	                  <div class="input-group">
 	                  	<div class="input-group-text"><i class="fa-regular fa-envelope"></i></div>
-	                  	<input type="email" class="form-control" id="username" placeholder="email" name="email">
+	                  	<input type="text" class="form-control" id="otp" placeholder="OTP" name="otp">
 	                  </div> 
 	                </div>
 
 	                 <div class="mb-3">
-	                  <input style="width:100%" type="submit" class="btn btn-primary" value="send otp" name="sendotp">
+	                  <input style="width:100%" type="submit" class="btn btn-primary" value="send otp" name="putotp">
                 	</div>
 				</form>
 

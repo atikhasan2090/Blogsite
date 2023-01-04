@@ -2,14 +2,33 @@
 <?php require_once"include/session.php" ?>
 <?php require_once"include/functions.php" ?>
 
-
 <?php 
+if(isset($_POST['passchange'])){ 
+	$new_pass=$_POST['new_password'];
+	$retype_pass=$_POST['retype_password'];
+	$user_email=$_SESSION['fmail'];
 
-// if($_SESSION['user_name']){
-// 	Redirect_to("dashboard.php");
 
-// }
 
+
+					if($new_pass==$retype_pass){
+						$query="UPDATE users SET password = $new_pass where email='$user_email'";
+						$result=mysqli_query($db,$query);
+						$_SESSION['Successmessage'] = "Password change successfully";
+										$_SESSION['otp'] = null;
+										$_SESSION['fmail'] = null;
+										Redirect_to("blog.php");
+									}else{
+										$_SESSION['Errormessage'] = "new password and retype password doesn't match";
+										Redirect_to("setnewpass.php");
+									}
+				
+
+
+		}
+
+
+	
 
  ?>
 
@@ -17,17 +36,12 @@
 
 
 
-
-
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User LOG IN</title>
+	<title>Admin LOG IN</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/frontstyle.css">
 	<!-- font awesome -->
@@ -55,7 +69,7 @@
 	<div style="height: 10px; background: #ddd;"></div>
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">Blogsite</a>
+         <a class="navbar-brand" href="#"><img src="images/LOGO.png" width="250px"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -85,12 +99,10 @@
 	        <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search-topic">
 	        <button class="btn btn-outline-success" type="submit" name="search-btn">Search</button>
 	      </form>
-
-
         </div>
       </div>
     </nav> 
-	<div style="height: 10px; background: #ddd;"></div>s
+	<div style="height: 10px; background: #ddd;"></div>
 
 
 	<div class="container-fluid">
@@ -101,29 +113,36 @@
 
 			<div class="col-sm-4 offset-4">
 				<br><br><br><br><br>
-				<h2 class="text-center mb-4">Password vulli kemne?</h2>
+				<h2 class="text-center mb-4">User Password Change</h2>
 
 				<div><?php 
 				echo message(); 
 				echo Successmessage(); 
 				?></div>
 				
-				<form action="mail.php" method="POST" enctype="multipart/form-data">
+				<form action="setnewpass.php" method="POST" enctype="multipart/form-data">
+
 
 	                <div class="mb-3">
-	                  <label for="email" class="form-label"><span class="FieldInfo">Your email :</span></label>
+	                  <label for="new_password" class="form-label"><span class="FieldInfo">new password :</span></label>
 	                  <div class="input-group">
 	                  	<div class="input-group-text"><i class="fa-regular fa-envelope"></i></div>
-	                  	<input type="email" class="form-control" id="username" placeholder="email" name="email">
+	                  	<input type="password" class="form-control" id="new_password" placeholder="new_password" name="new_password">
 	                  </div> 
 	                </div>
-
+	                <div class="mb-3">
+	                  <label for="retype_password" class="form-label"><span class="FieldInfo">retype password :</span></label>
+	                  <div class="input-group">
+	                  	<div class="input-group-text"><i class="fa-regular fa-envelope"></i></div>
+	                  	<input type="password" class="form-control" id="retype_password" placeholder="retype_password" name="retype_password">
+	                  </div> 
+	                </div>
+	       
 	                 <div class="mb-3">
-	                  <input style="width:100%" type="submit" class="btn btn-primary" value="send otp" name="sendotp">
+	                  <input style="width:100%" type="submit" class="btn btn-primary" value="change password" name="passchange">
                 	</div>
 				</form>
 
-				<p class="text-center">New to blogsite ? <a href="userregistration.php">register now</a></p>
 				
 
 			</div>
