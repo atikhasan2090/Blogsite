@@ -4,7 +4,7 @@
 <?php 
 
 function redirect_to($new_location){
-	header("Location:".$new_location);
+	echo "<script> window.location.href = '{$new_location}'; </script>";
     exit();
 }
 

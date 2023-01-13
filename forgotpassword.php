@@ -1,5 +1,5 @@
-<?php require_once"include/db.php" ?>
 <?php require_once"include/session.php" ?>
+<?php require_once"include/db.php" ?>
 <?php require_once"include/functions.php" ?>
 
 
@@ -101,7 +101,7 @@
 
 			<div class="col-sm-4 offset-4">
 				<br><br><br><br><br>
-				<h2 class="text-center mb-4">Password vulli kemne?</h2>
+				<h2 class="text-center mb-4">Forgot Password?</h2>
 
 				<div><?php 
 				echo message(); 
