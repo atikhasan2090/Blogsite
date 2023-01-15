@@ -2,6 +2,9 @@
 <?php require_once"include/db.php" ?>
 <?php require_once"include/functions.php" ?>
 
+
+<!-- password change -->
+
 <?php 
 if(isset($_POST['passchange'])){ 
 	$old_pass=$_POST['old_password'];
